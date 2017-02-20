@@ -1,0 +1,349 @@
+body {
+    font-size: 13px;
+}
+
+td {
+    font-size: 13px;
+}
+
+.joy-panel-body tr {
+    height: 28px
+}
+
+.joy-panel {
+    border: 1px solid #cccccc;
+    width: 1000px;
+    margin: 5px;
+    margin-bottom: 15px;
+}
+
+.joy-panel-head {
+    height: 30px;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    text-align: left;
+    font-size: 15px;
+    width: 100%;
+    line-height: 30px;
+    padding-left: 0;
+    font-weight: bold;
+    background: #ebeadb url(images/hd_row_over_bg.gif) repeat-x;
+}
+
+.joy-panel-body {
+    width: 100%;
+    padding: 0;
+}
+
+.joy-list-title {
+    height: 40px;
+    background: url(images/biaotou.jpg) repeat-x left top;
+    border-top: 1px solid #dfdfdf;
+    border-left: 1px solid #dfdfdf;
+    text-align: center;
+    font-weight: bold;
+}
+
+.joy-list-td {
+    border-bottom: 1px dotted #666;
+    padding-bottom: 5px;
+    padding-top: 6px;
+    border-left: 1px solid #dfdfdf
+}
+
+.joy-list-tr-even {
+    backgroundColor: #EEEEFF
+}
+
+.hover {
+    background-color: #FFFF80;
+}
+
+DIV.fanye {
+    PADDING-RIGHT: 3px;
+    PADDING-LEFT: 3px;
+    PADDING-BOTTOM: 3px;
+    MARGIN: 3px;
+    PADDING-TOP: 3px;
+    FONT-FAMILY: Tahoma, Helvetica, sans-serif;
+    TEXT-ALIGN: right;
+    font-size: 12px;
+}
+
+DIV.fanye A {
+    BORDER-RIGHT: #9b9b9b 1px solid;
+    PADDING-RIGHT: 8px;
+    BACKGROUND-POSITION: 50% bottom;
+    BORDER-TOP: #9b9b9b 1px solid;
+    PADDING-LEFT: 8px;
+    PADDING-BOTTOM: 2px;
+    BORDER-LEFT: #9b9b9b 1px solid;
+    COLOR: #5392b5;
+    MARGIN-RIGHT: 3px;
+    PADDING-TOP: 2px;
+    BORDER-BOTTOM: #9b9b9b 1px solid;
+    TEXT-DECORATION: none
+}
+
+.datagrid-toolbar {
+    height: 28px;
+    background: #efefef;
+    padding: 1px 2px;
+    border-bottom: 1px solid #ccc;
+}
+
+DIV.fanye A:hover {
+    BORDER-RIGHT: #2b55af 1px solid;
+    BORDER-TOP: #2b55af 1px solid;
+    BACKGROUND-IMAGE: none;
+    BORDER-LEFT: #2b55af 1px solid;
+    COLOR: #fff;
+    BORDER-BOTTOM: #2b55af 1px solid;
+    BACKGROUND-COLOR: #5392b5
+}
+
+DIV.fanye A:active {
+    BORDER-RIGHT: #2b55af 1px solid;
+    BORDER-TOP: #2b55af 1px solid;
+    BACKGROUND-IMAGE: none;
+    BORDER-LEFT: #2b55af 1px solid;
+    COLOR: #fff;
+    BORDER-BOTTOM: #2b55af 1px solid;
+    BACKGROUND-COLOR: #5392b5
+}
+
+DIV.fanye SPAN.current {
+    PADDING-RIGHT: 6px;
+    PADDING-LEFT: 6px;
+    FONT-WEIGHT: bold;
+    PADDING-BOTTOM: 2px;
+    COLOR: #000;
+    MARGIN-RIGHT: 3px;
+    PADDING-TOP: 2px
+}
+
+DIV.fanye SPAN.disabled {
+    DISPLAY: none
+}
+
+DIV.fanye A.next {
+    BORDER-RIGHT: #9b9b9b 2px solid;
+    BORDER-TOP: #9b9b9b 2px solid;
+    MARGIN: 0 0 0 10px;
+    BORDER-LEFT: #9b9b9b 2px solid;
+    BORDER-BOTTOM: #9b9b9b 2px solid
+}
+
+DIV.fanye A.next:hover {
+    BORDER-RIGHT: #2b55af 2px solid;
+    BORDER-TOP: #2b55af 2px solid;
+    BORDER-LEFT: #2b55af 2px solid;
+    BORDER-BOTTOM: #2b55af 2px solid
+}
+
+DIV.fanye A.prev {
+    BORDER-RIGHT: #9b9b9b 2px solid;
+    BORDER-TOP: #9b9b9b 2px solid;
+    margin: 0 10px 0 0;
+    BORDER-LEFT: #9b9b9b 2px solid;
+    BORDER-BOTTOM: #9b9b9b 2px solid
+}
+
+DIV.fanye A.prev:hover {
+    BORDER-RIGHT: #2b55af 2px solid;
+    BORDER-TOP: #2b55af 2px solid;
+    BORDER-LEFT: #2b55af 2px solid;
+    BORDER-BOTTOM: #2b55af 2px solid
+}
+
+.datagrid-toolbar {
+    height: 28px;
+    background: #efefef;
+    padding: 1px 2px;
+    border-bottom: 1px solid #ccc;
+}
+
+a.l-btn {
+    color: #444;
+    background: url('images/button_a_bg.gif') no-repeat top right;
+    font-size: 12px;
+    text-decoration: none;
+    display: inline-block;
+    zoom: 1;
+    height: 24px;
+    padding-right: 18px;
+    cursor: pointer;
+    outline: none;
+}
+
+a.l-btn-plain {
+    background: transparent;
+    padding-right: 5px;
+    border: 1px solid transparent;
+    _padding: 1px 6px 1px 1px;
+}
+
+a.l-btn-disabled {
+    color: #ccc;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    cursor: default;
+}
+
+a.l-btn span.l-btn-left {
+    display: block;
+    background: url('images/button_span_bg.gif') no-repeat top left;
+    padding: 4px 0 4px 18px;
+    line-height: 16px;
+}
+
+a.l-btn-plain span.l-btn-left {
+    background: transparent;
+    padding-left: 5px;
+}
+
+a.l-btn span span.l-btn-text {
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+    padding: 0;
+}
+
+a.l-btn span span span.l-btn-empty {
+    display: inline-block;
+    padding: 0;
+    width: 16px;
+}
+
+a:hover.l-btn {
+    background-position: bottom right;
+    outline: none;
+}
+
+a:hover.l-btn span.l-btn-left {
+    background-position: bottom left;
+}
+
+a:hover.l-btn-plain {
+    border: 1px solid #7eabcd;
+    background: url('images/button_plain_hover.png') repeat-x left bottom;
+    _padding: 0 5px 0 0;
+}
+
+a:hover.l-btn-disabled {
+    background-position: top right;
+}
+
+a:hover.l-btn-disabled span.l-btn-left {
+    background-position: top left;
+}
+
+.icon-add {
+    background: url('images/edit_add.png') no-repeat;
+}
+
+.icon-remove {
+    background: url('images/edit_delete.png') no-repeat;
+}
+
+.icon-view {
+    background: url('images/view.png') no-repeat;
+}
+
+.icon-apply {
+    background: url('images/tackle_apply.png') no-repeat;
+}
+
+.icon-xls {
+    background: url('images/tool_xls.gif') no-repeat;
+}
+
+.icon-edit {
+    background: url('images/pencil.png') no-repeat;
+}
+
+.icon-user {
+    background: url('images/user.png') no-repeat;
+}
+
+/*新增修改预览页面*/
+.joy-form-table {
+    border: 1px solid #cccccc;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.joy-form-table-title {
+    height: 30px;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    text-align: center;
+    font-size: 15px;
+    width: 100%;
+    line-height: 30px;
+    padding-left: 0;
+    font-weight: bold;
+    background: #ebeadb url(images/hd_row_over_bg.gif) repeat-x;
+}
+
+.joy-form-td-title {
+    height: 40px;
+    background: url(images/biaotou.jpg) repeat-x left top;
+    border-top: 1px solid #dfdfdf;
+    border-left: 1px solid #dfdfdf;
+    text-align: center;
+    font-weight: bold;
+}
+
+.joy-form-td-value {
+    border-bottom: 1px solid #dfdfdf;
+    padding-bottom: 5px;
+    padding-top: 6px;
+    border-left: 1px solid #dfdfdf
+}
+
+.joy-button {
+    padding-bottom: 0;
+    padding-top: 3px;
+    cursor: pointer;
+    width: 80px;
+}
+
+/*XieKang add 提示信息样式*/
+.tip {
+    color: gray;
+}
+
+.joy-page {
+    background: url('images/5_03.jpg') repeat-x left center;
+    height: 28px;
+    margin-bottom: 10px;
+    border: 1px solid #a1bdef;
+    line-height: 24px;
+    border-top: none;
+}
+
+.joy-nextbu {
+    margin-bottom: 0;
+}
+
+.joy-page .joy-left {
+    float: left;
+    width: 300px;
+    margin-left: 5px;
+    padding-top: 2px;
+}
+
+.joy-page .joy-right {
+    float: right;
+    width: 300px;
+    margin-right: 5px;
+}
+
+.joy-next img {
+    border: none;
+    margin-left: 2px;
+    margin-right: 5px;
+}
