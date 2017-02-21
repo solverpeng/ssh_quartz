@@ -27,13 +27,9 @@ import java.util.Map;
 public class TaskAction extends ActionSupport implements ModelDriven<Task>, Preparable, RequestAware{
     private static final String LIST_SUCCESS = "list-success";
     private static final String CREATE_SUCCESS = "create-success";
+    private static final String SHOW_SUCCESS = "show-success";
 
     private Map<String, Object> request;
-    private InputStream inputStream;
-
-    public InputStream getInputStream() {
-        return inputStream;
-    }
 
     private Task task;
     private Integer id;
@@ -72,38 +68,38 @@ public class TaskAction extends ActionSupport implements ModelDriven<Task>, Prep
     }
 
     public void prepareSave() {
-        this.task = new Task();
+        if (id != null) {
+            this.task = taskService.getTaskById(id);
+        } else {
+            this.task = new Task();
+        }
     }
 
     public String save() {
+        String result = "1";
         try {
             String operateClass = task.getOperateClass();
-            HttpServletResponse response = ServletActionContext.getResponse();
-            response.setCharacterEncoding("UTF-8");
-            PrintWriter pWriter = response.getWriter();
 
             try {
                 Class.forName(operateClass);
             } catch (Exception e) {
                 e.printStackTrace();
-                pWriter.write("不存在[" + operateClass + "]类！");
-                pWriter.flush();
-                pWriter.close();
+                result = "不存在[" + operateClass + "]类！";
             }
 
-            String count = taskService.existTask(operateClass);
+            String count = taskService.existTask(task.getTaskName());
+
             if(StringUtils.isBlank(count) || !"0".equals(count)) {
-                pWriter.write("该任务已经存在!");
-                pWriter.flush();
-                pWriter.close();
+                result = "该任务已经存在!";
             } else {
-                taskService.saveTask(task);
+                taskService.saveOrUpdateTask(task);
             }
         } catch (Exception e) {
             e.printStackTrace();
+            result = "0";
         }
 
-        return writeAjaxResponse("1");
+        return writeAjaxResponse(result);
     }
 
     public void prepareEdit() {
@@ -112,6 +108,14 @@ public class TaskAction extends ActionSupport implements ModelDriven<Task>, Prep
 
     public String edit() {
         return CREATE_SUCCESS;
+    }
+
+    public void prepareShow() {
+        this.task = taskService.getTaskById(id);
+    }
+
+    public String show() {
+        return SHOW_SUCCESS;
     }
 
     private String writeAjaxResponse(String ajaxString){

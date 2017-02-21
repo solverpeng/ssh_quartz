@@ -17,6 +17,7 @@
         <action name="*" class="com.solverpeng.action.TaskAction" method="{1}">
             <result name="list-success">/WEB-INF/views/list.jsp</result>
             <result name="create-success">/WEB-INF/views/create.jsp</result>
+            <result name="show-success">/WEB-INF/views/show.jsp</result>
             <result name="save-success" type="stream"></result>
         </action>
 

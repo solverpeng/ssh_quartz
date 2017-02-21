@@ -10,9 +10,9 @@ import java.util.List;
 public interface TaskDao {
     List listTask(Task task);
 
-    void saveTask(Task task);
-
-    String existTask(String operateClass);
+    String existTask(String taskName);
 
     Task getTaskById(Integer id);
+
+    void saveOrUpdateTask(Task task);
 }

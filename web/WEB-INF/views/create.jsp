@@ -11,12 +11,11 @@
     <title>新增任务</title>
 </head>
 <body>
-<s:debug/>
 <form id="form1" action="<s:url action="save"/>" method="post">
     <table class="joy-form-table">
         <tr>
             <td class="joy-form-table-title" colspan="2">
-                新增定时任务
+                <c:if test="${id == null}">新增</c:if><c:if test="${id != null}">修改</c:if>定时任务
             </td>
         </tr>
         <input type="hidden" id="id" name="id" value="${id}"/>
@@ -148,7 +147,7 @@
                 return $('#form1').form('validate');
             },
             success: function (data) {
-                if (data === 1) {
+                if (data === '1') {
                     alert("保存成功!");
                     window.close();
                 } else {

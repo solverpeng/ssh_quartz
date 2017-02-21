@@ -34,19 +34,20 @@ public class TaskDaoImpl extends BaseDao<Task, Integer> implements TaskDao {
     }
 
     @Override
-    public void saveTask(Task task) {
-        save(task);
-    }
-
-    @Override
-    public String existTask(String operateClass) {
+    public String existTask(String taskName) {
         Criteria criteria = getSession().createCriteria(Task.class);
-        criteria.setProjection(Projections.count("operateClass"));
+        criteria.add(Restrictions.eq("taskName", taskName));
+        criteria.setProjection(Projections.count("taskName"));
         return criteria.uniqueResult().toString();
     }
 
     @Override
     public Task getTaskById(Integer id) {
         return getById(id);
+    }
+
+    @Override
+    public void saveOrUpdateTask(Task task) {
+        save(task);
     }
 }

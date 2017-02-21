@@ -10,9 +10,9 @@ import java.util.List;
 public interface TaskService {
     List listTask(Task task);
 
-    void saveTask(Task task);
+    void saveOrUpdateTask(Task task);
 
-    String existTask(String operateClass);
+    String existTask(String taskName);
 
     Task getTaskById(Integer id);
 }

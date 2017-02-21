@@ -26,8 +26,8 @@ public class TaskServiceImpl implements TaskService{
 
     @Transactional
     @Override
-    public void saveTask(Task task) {
-        taskDao.saveTask(task);
+    public void saveOrUpdateTask(Task task) {
+        taskDao.saveOrUpdateTask(task);
         // 执行任务
         /*if(CronJob.isRun()){
             if(ttaskInfo.getStatus().equals("1")){
@@ -38,8 +38,8 @@ public class TaskServiceImpl implements TaskService{
 
     @Transactional(readOnly = true)
     @Override
-    public String existTask(String operateClass) {
-        return taskDao.existTask(operateClass);
+    public String existTask(String taskName) {
+        return taskDao.existTask(taskName);
     }
 
     @Transactional(readOnly = true)

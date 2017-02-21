@@ -161,7 +161,6 @@
                 <td class="joy-list-title">任务间隔单位</td>
                 <td class="joy-list-title">Cron表达式</td>
                 <td class="joy-list-title">任务状态</td>
-                <td class="joy-list-title">操作</td>
             </tr>
             <c:if test="${requestScope.page.content.size() eq '0'}">
                 <tr>
@@ -183,10 +182,6 @@
                         <td align="center" class="joy-list-td">${task.intervalUnit}</td>
                         <td align="center" class="joy-list-td">${task.cronExpression}</td>
                         <td align="center" class="joy-list-td">${task.status=='0'?'启用':'停用'}</td>
-                        <td align="center" class="joy-list-td">
-                            <a href="javascript:void(0);"
-                               onclick="changeStatus('${task.id}',this)">${task.status=='1'?'启用':'停用'}</a>
-                        </td>
                     </tr>
                 </c:forEach>
             </c:if>
