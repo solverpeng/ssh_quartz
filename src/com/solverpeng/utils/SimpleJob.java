@@ -1,6 +1,5 @@
 package com.solverpeng.utils;
 
-import cn.org.rapid_framework.util.holder.ApplicationContextHolder;
 import com.solverpeng.beans.Task;
 import com.solverpeng.service.TaskService;
 import org.apache.log4j.Logger;
@@ -17,7 +16,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import static org.quartz.CalendarIntervalScheduleBuilder.calendarIntervalSchedule;
-import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 
 public class SimpleJob {
@@ -87,30 +85,33 @@ public class SimpleJob {
         return scheduler.isInStandbyMode();
     }
 
+    public static boolean exist(Task task) throws SchedulerException {
+        return scheduler.checkExists(new JobKey(task.getOperateClass()));
+    }
+
     /**
      * 添加定时任务
      */
     public void addJob(Task task) throws Exception {
-        logger.info("添加定时任务:" + task.getTaskName());
-        Scheduler scheduler = schedulerFactory.getScheduler();
-        Class clazz = Class.forName(task.getOperateClass());
-        JobDetail job = newJob(clazz).withIdentity(task.getOperateClass()).build();
-        JobDataMap map = job.getJobDataMap();
-        map.put("task", task);
+        logger.info("添加定时任务:[" + task.getTaskName() + "]");
+        String operateClass = task.getOperateClass();
+        Class clazz = Class.forName(operateClass);
+        JobDetailImpl jobDetail = new JobDetailImpl();
+        jobDetail.setJobClass(clazz);
+        jobDetail.setName(operateClass);
         Trigger trigger = getTrigger(task);
-        scheduler.scheduleJob(job, trigger);
-        logger.info("添加定时任务" + task.getTaskName() + "成功!");
+        scheduler.scheduleJob(jobDetail, trigger);
+        logger.info("添加定时任务:[" + task.getTaskName() + "]成功!");
     }
 
     /**
      * 删除指定定时任务
      */
     public void removeJob(Task task) throws Exception {
-        logger.info("移除定时任务:" + task.getTaskName());
-        Scheduler scheduler = schedulerFactory.getScheduler();
+        logger.info("移除定时任务:[" + task.getTaskName() + "]");
         JobKey key = new JobKey(task.getOperateClass());
         scheduler.deleteJob(key);
-        logger.info("移除定时任务" + task.getTaskName() + "成功!");
+        logger.info("移除定时任务:[" + task.getTaskName() + "}成功!");
     }
 
     /**
@@ -183,7 +184,7 @@ public class SimpleJob {
     /**
      * 计算出下一次要执行的时间
      */
-    public static Calendar futureDate(Calendar calendar, int interval, int unit) {
+    private static Calendar futureDate(Calendar calendar, int interval, int unit) {
         Calendar temp = Calendar.getInstance();
         temp.setTime(DateUtil.stringToDate("19700101080000000", "yyyyMMddHHmmssSSS"));
         temp.setLenient(true);
@@ -203,7 +204,4 @@ public class SimpleJob {
         return calendar;
     }
 
-    public static boolean exist(Task task) throws SchedulerException {
-        return scheduler.checkExists(new JobKey(task.getOperateClass()));
-    }
 }
