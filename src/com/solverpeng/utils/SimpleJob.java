@@ -92,7 +92,7 @@ public class SimpleJob {
     /**
      * 添加定时任务
      */
-    public void addJob(Task task) throws Exception {
+    public static void addJob(Task task) throws Exception {
         logger.info("添加定时任务:[" + task.getTaskName() + "]");
         String operateClass = task.getOperateClass();
         Class clazz = Class.forName(operateClass);
@@ -107,7 +107,7 @@ public class SimpleJob {
     /**
      * 删除指定定时任务
      */
-    public void removeJob(Task task) throws Exception {
+    public static void removeJob(Task task) throws Exception {
         logger.info("移除定时任务:[" + task.getTaskName() + "]");
         JobKey key = new JobKey(task.getOperateClass());
         scheduler.deleteJob(key);

@@ -30,6 +30,7 @@ public class TaskDaoImpl extends BaseDao<Task, Integer> implements TaskDao {
         if (Objects.equals(1, task.getStatus())) {
             criteria.add(Restrictions.eq("status", task.getStatus()));
         }
+        criteria.add(Restrictions.eq("deleted", 0));
         return criteria.list();
     }
 
@@ -54,6 +55,12 @@ public class TaskDaoImpl extends BaseDao<Task, Integer> implements TaskDao {
     @Override
     public List<Task> getTaskList() {
         return getByList("deleted", 0);
+    }
+
+    @Override
+    public void removeJob(Task task) {
+        task.setDeleted(1);
+        getSession().update(task);
     }
 
 }

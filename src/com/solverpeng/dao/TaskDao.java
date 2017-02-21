@@ -18,4 +18,5 @@ public interface TaskDao {
 
     List<Task> getTaskList();
 
+    void removeJob(Task task);
 }

@@ -1,6 +1,7 @@
 package com.solverpeng.service;
 
 import com.solverpeng.beans.Task;
+import org.quartz.SchedulerException;
 
 import java.util.List;
 
@@ -10,11 +11,13 @@ import java.util.List;
 public interface TaskService {
     List listTask(Task task);
 
-    void saveOrUpdateTask(Task task);
+    void saveOrUpdateTask(Task task) throws SchedulerException, Exception;
 
     String existTask(String taskName);
 
     Task getTaskById(Integer id);
 
     List<Task> getTaskList();
+
+    int removeTask(Integer id);
 }

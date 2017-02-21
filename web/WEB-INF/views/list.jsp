@@ -54,6 +54,31 @@
                 window.open('${ctx}/edit.action?id=' + $id.val(), '', 'height=600,width=500,,location=no,scrollbars');
             });
 
+            $('#btndel').click(function () {
+                var $id = $('[name=ids]:checkbox:checked');
+
+                if ($id.length === 0) {
+                    alert("请选择要删除的信息！");
+                    return false;
+                }
+                var flag = window.confirm("确定要删除任务 " + $id.val() + " 吗？");
+
+                if(flag) {
+                    $.ajax({
+                        type: "POST",
+                        url: "${ctx}/remove.action",
+                        data: {
+                            id: $id.val()
+                        },
+                        success: function(result){
+                            if(result === '1') {
+                                $id.parents('tr').remove();
+                            }
+                        }
+                    });
+                }
+            });
+
             $('#btnshow').click(function () {
                 var $id = $('[name=ids]:checkbox:checked');
 
@@ -141,6 +166,11 @@
         <a href="javascript:void(0)" style="float: left;" class="l-btn l-btn-plain" id="btnedit">
 			<span class="l-btn-left">
 				<span class="l-btn-text icon-edit" style="padding-left: 20px;">修改</span>
+			</span>
+        </a>
+        <a href="javascript:void(0)" style="float: left;" class="l-btn l-btn-plain" id="btndel">
+			<span class="l-btn-left">
+				<span class="l-btn-text icon-remove" style="padding-left: 20px;">删除</span>
 			</span>
         </a>
     </div>

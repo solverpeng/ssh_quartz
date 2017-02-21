@@ -28,6 +28,7 @@ public class TaskAction extends ActionSupport implements ModelDriven<Task>, Prep
     private static final String LIST_SUCCESS = "list-success";
     private static final String CREATE_SUCCESS = "create-success";
     private static final String SHOW_SUCCESS = "show-success";
+    private static final String REMOVE_SUCCESS = "remove-success";
 
     private Map<String, Object> request;
 
@@ -85,7 +86,13 @@ public class TaskAction extends ActionSupport implements ModelDriven<Task>, Prep
 
             String count = taskService.existTask(task.getTaskName());
 
-            if (StringUtils.isBlank(count) || !"0".equals(count)) {
+            // 若是在修改的情况下，则不验证该 Task 是否存在
+            boolean exist = false;
+            if (id == null) {
+                exist = SimpleJob.exist(task);
+            }
+
+            if (StringUtils.isBlank(count) || !"0".equals(count) || exist) {
                 result = "该任务已经存在!";
             } else {
                 taskService.saveOrUpdateTask(task);
@@ -114,7 +121,18 @@ public class TaskAction extends ActionSupport implements ModelDriven<Task>, Prep
         return SHOW_SUCCESS;
     }
 
-    public String startTask() throws SchedulerException {
+    public String remove() {
+        String result = "0";
+        if (id != null) {
+            int returnCode = taskService.removeTask(id);
+            if (returnCode == 1) {
+                result = "1";
+            }
+        }
+        return writeAjaxResponse(result);
+    }
+
+    public String startTask() {
         String result = "0";
         try {
             if (SimpleJob.isStop() || !SimpleJob.isRun()) {
