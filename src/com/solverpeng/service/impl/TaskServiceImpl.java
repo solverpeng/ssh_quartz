@@ -47,4 +47,10 @@ public class TaskServiceImpl implements TaskService{
     public Task getTaskById(Integer id) {
         return taskDao.getTaskById(id);
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Task> getTaskList() {
+        return taskDao.getTaskList();
+    }
 }

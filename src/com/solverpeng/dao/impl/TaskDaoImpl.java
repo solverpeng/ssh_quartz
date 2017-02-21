@@ -50,4 +50,10 @@ public class TaskDaoImpl extends BaseDao<Task, Integer> implements TaskDao {
     public void saveOrUpdateTask(Task task) {
         save(task);
     }
+
+    @Override
+    public List<Task> getTaskList() {
+        return getByList("deleted", 0);
+    }
+
 }

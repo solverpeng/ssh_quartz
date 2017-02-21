@@ -15,4 +15,7 @@ public interface TaskDao {
     Task getTaskById(Integer id);
 
     void saveOrUpdateTask(Task task);
+
+    List<Task> getTaskList();
+
 }

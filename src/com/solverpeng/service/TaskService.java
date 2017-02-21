@@ -15,4 +15,6 @@ public interface TaskService {
     String existTask(String taskName);
 
     Task getTaskById(Integer id);
+
+    List<Task> getTaskList();
 }

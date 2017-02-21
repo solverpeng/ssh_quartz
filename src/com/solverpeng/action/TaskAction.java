@@ -5,16 +5,16 @@ import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import com.solverpeng.beans.Task;
 import com.solverpeng.service.TaskService;
+import com.solverpeng.utils.SimpleJob;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
+import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +24,7 @@ import java.util.Map;
  */
 @Controller
 @Scope(value = "prototype")
-public class TaskAction extends ActionSupport implements ModelDriven<Task>, Preparable, RequestAware{
+public class TaskAction extends ActionSupport implements ModelDriven<Task>, Preparable, RequestAware {
     private static final String LIST_SUCCESS = "list-success";
     private static final String CREATE_SUCCESS = "create-success";
     private static final String SHOW_SUCCESS = "show-success";
@@ -43,10 +43,6 @@ public class TaskAction extends ActionSupport implements ModelDriven<Task>, Prep
 
     @Autowired
     private TaskService taskService;
-
-    @Override
-    public void prepare() throws Exception {
-    }
 
     @Override
     public Task getModel() {
@@ -89,7 +85,7 @@ public class TaskAction extends ActionSupport implements ModelDriven<Task>, Prep
 
             String count = taskService.existTask(task.getTaskName());
 
-            if(StringUtils.isBlank(count) || !"0".equals(count)) {
+            if (StringUtils.isBlank(count) || !"0".equals(count)) {
                 result = "该任务已经存在!";
             } else {
                 taskService.saveOrUpdateTask(task);
@@ -118,7 +114,35 @@ public class TaskAction extends ActionSupport implements ModelDriven<Task>, Prep
         return SHOW_SUCCESS;
     }
 
-    private String writeAjaxResponse(String ajaxString){
+    public String startTask() throws SchedulerException {
+        String result = "0";
+        try {
+            if (SimpleJob.isStop() || !SimpleJob.isRun()) {
+                SimpleJob.begin();
+                result = "1";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return writeAjaxResponse(result);
+    }
+
+    public String endTask() {
+        String result = "0";
+        try {
+            if (!SimpleJob.isStop()) {
+                SimpleJob.stop();
+                result = "1";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return writeAjaxResponse(result);
+    }
+
+    private String writeAjaxResponse(String ajaxString) {
         try {
             ServletActionContext.getResponse().setContentType("text/html;charset=utf-8");
             PrintWriter out = ServletActionContext.getResponse().getWriter();
@@ -126,14 +150,16 @@ public class TaskAction extends ActionSupport implements ModelDriven<Task>, Prep
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
-        } finally {
-            return null;
         }
+        return null;
     }
 
     @Override
     public void setRequest(Map<String, Object> map) {
         this.request = map;
+    }
+
+    @Override
+    public void prepare() throws Exception {
     }
 }
