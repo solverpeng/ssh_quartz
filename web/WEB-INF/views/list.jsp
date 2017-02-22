@@ -89,23 +89,6 @@
                 window.open('${ctx}/show.action?id=' + $id.val(), '', 'height=600,width=500,,location=no,scrollbars');
             });
         });
-        function changeStatus(id, obj) {
-            $.post("${ctx}/changeTask.action", {"id": id},
-                function (data) {
-                    if (data === '1') {
-                        alert('启用成功！');
-                        $('#' + id).text("启用");
-                        obj.innerHTML = "停用";
-                    } else if (data === '2') {
-                        alert('停用成功！');
-                        $('#' + id).text("停用");
-                        obj.innerHTML = "启用";
-                    } else {
-                        alert('操作失败！');
-                    }
-                }
-            );
-        }
     </script>
 </head>
 <body>

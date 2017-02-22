@@ -11,7 +11,7 @@ import java.util.List;
 public interface TaskService {
     List listTask(Task task);
 
-    void saveOrUpdateTask(Task task) throws SchedulerException, Exception;
+    void saveOrUpdateTask(Task task) throws Exception;
 
     String existTask(String taskName);
 
@@ -20,4 +20,6 @@ public interface TaskService {
     List<Task> getTaskList();
 
     int removeTask(Integer id);
+
+    void updateTaskStatus(List<Integer> taskIdList, int status);
 }

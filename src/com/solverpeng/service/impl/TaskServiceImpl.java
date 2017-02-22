@@ -4,6 +4,7 @@ import com.solverpeng.beans.Task;
 import com.solverpeng.dao.TaskDao;
 import com.solverpeng.service.TaskService;
 import com.solverpeng.utils.SimpleJob;
+import org.apache.commons.collections.CollectionUtils;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,6 +66,12 @@ public class TaskServiceImpl implements TaskService{
             e.printStackTrace();
         }
         return returnCode;
+    }
+
+    @Override
+    @Transactional
+    public void updateTaskStatus(List<Integer> taskIdList, int status) {
+        taskDao.updateTaskStatus(taskIdList, status);
     }
 
     private void restartScheduler() throws SchedulerException {

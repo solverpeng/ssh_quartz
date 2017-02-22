@@ -6,6 +6,7 @@ import com.opensymphony.xwork2.Preparable;
 import com.solverpeng.beans.Task;
 import com.solverpeng.service.TaskService;
 import com.solverpeng.utils.SimpleJob;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
+
 
 /**
  * Created by solverpeng on 2017/2/13 0013.

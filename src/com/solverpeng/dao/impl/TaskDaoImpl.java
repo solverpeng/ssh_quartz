@@ -8,8 +8,13 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.jdbc.Work;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
@@ -61,6 +66,26 @@ public class TaskDaoImpl extends BaseDao<Task, Integer> implements TaskDao {
     public void removeJob(Task task) {
         task.setDeleted(1);
         getSession().update(task);
+    }
+
+    @Override
+    public void updateTaskStatus(final List<Integer> taskIdList, final int status) {
+        getSession().doWork(new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                connection.setAutoCommit(false);
+                String sql = "update task set status = ? where id = ?";
+                PreparedStatement preparedStatement =
+                        connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                for (Integer id : taskIdList) {
+                    preparedStatement.setInt(1, status);
+                    preparedStatement.setInt(2, id);
+                    preparedStatement.addBatch();
+                }
+                preparedStatement.executeBatch();
+                connection.commit();
+            }
+        });
     }
 
 }
